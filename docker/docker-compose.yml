@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  postgresql:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: supermarket_password
+      POSTGRES_USER: supermarket_user
+      POSTGRES_DB: supermarket
+    ports:
+      - '5432:5432'
+  pgadmin4:
+    image: dpage/pgadmin4
+    ports:
+      - '5050:5050'
+      - '85:80'
+    links:
+      - postgresql:postgresql
+    depends_on:
+      - postgresql
+    environment:
+      PGADMIN_DEFAULT_EMAIL: supermarket@supermarket.com
+      PGADMIN_DEFAULT_PASSWORD: supermarket
